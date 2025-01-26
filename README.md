@@ -12,7 +12,8 @@ Development Server: Start the development server with npm run dev, yarn dev, pnp
 **Technologies Used:**
 
 Languages: TypeScript, CSS, JavaScript.
-Dependencies:
+
+**Dependencies:**
 
 @ai-sdk/openai, @google/generative-ai for AI integrations.
 @hookform/resolvers, react-hook-form for form handling.
@@ -27,7 +28,8 @@ shadcn: Used for UI component management, configured in components.json.
 **Contributors:**
 
 RaimulShaon: Main contributor with significant contributions to the project.
-Repository Structure:
+
+**Repository Structure:**
 
 The repository contains various directories and files, including configuration files, source code, and assets, following a typical Next.js project structure.
 **Notable Challenges and Solutions:**
