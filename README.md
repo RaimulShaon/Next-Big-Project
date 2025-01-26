@@ -32,6 +32,7 @@ RaimulShaon: Main contributor with significant contributions to the project.
 **Repository Structure:**
 
 The repository contains various directories and files, including configuration files, source code, and assets, following a typical Next.js project structure.
+
 **Notable Challenges and Solutions:**
 
 Efficiently managing and optimizing the application for both server-side and client-side rendering.
