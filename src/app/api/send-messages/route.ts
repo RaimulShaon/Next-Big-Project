@@ -6,7 +6,7 @@ import { message as mesge } from "@/model/User.model";
 
 export async function POST(request:Request) {
     await dbConnect()
-    const {username, message} = await request.json()
+    const {username, content} = await request.json()
     try {
         const user = await UserModel.findOne(username)
         if (!user) {
@@ -19,7 +19,7 @@ export async function POST(request:Request) {
               { status: 403 } // 403 Forbidden status
             );
         }
-        const newmessage = {content:"", createdAt: new Date()}
+        const newmessage = {content, createdAt: new Date()}
         user.messages.push(newmessage as mesge )
         await user.save()
         

@@ -17,13 +17,13 @@ export async function GET(request:Request) {
     }
     const userId = new mongoose.Types.ObjectId(user._id)
     try {
-        const useraggt = await UserModel.aggregate([
+        const showMessage = await UserModel.aggregate([
             {$match: {_id: userId}},
             {$unwind: '$messages'},
             {$sort: {'messages.createdAt': -1}},
             {$group: {_id: '$_id', messages: {$push: '$messages'}}}
         ])
-        if (!user || useraggt.length === 0) {
+        if (!user || showMessage.length === 0) {
             return Response.json(
               { message: 'User not found', success: false },
               { status: 404 }
@@ -31,7 +31,7 @@ export async function GET(request:Request) {
           }
       
           return Response.json(
-            { messages: useraggt[0].messages },
+            { messages: showMessage[0].messages },
             {
               status: 200,
             }

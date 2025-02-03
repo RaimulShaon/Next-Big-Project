@@ -15,7 +15,7 @@ import {
     otp: string
   }
 
-  export default function verification ({username, otp}: verificationEmail ){
+  export default function Verification ({username, otp}: verificationEmail ){
 
   
  return (

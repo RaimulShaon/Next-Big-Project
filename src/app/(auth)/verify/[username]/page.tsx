@@ -58,9 +58,9 @@ function verify() {
                     render={({ field }) => (
                         <FormItem>
                           <FormLabel>Username</FormLabel>
-                          <FormControl>
+                          
                             <Input placeholder="Verification code" {...field}  />
-                          </FormControl>
+                       
                         <FormMessage />
                     </FormItem>
                     )}

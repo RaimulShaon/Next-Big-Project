@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useToast } from "@/hooks/use-toast"
-import axios, { AxiosError } from 'axios'
 import { useRouter } from 'next/navigation';
 import { ApiResponse } from '@/types/ApiResponse';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -66,11 +65,10 @@ function signInform() {
                 render={({ field }) => (
                     <FormItem>
                     <FormLabel>Email</FormLabel>
-                    <FormControl>
+                    
                         <Input type='text' placeholder="Email" {...field} 
                          />
                       
-                    </FormControl>
                     <FormDescription>This is your public display name.</FormDescription>
                     <FormMessage />
                     </FormItem>
@@ -81,13 +79,11 @@ function signInform() {
                 name= "password"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                        <Input type='password' placeholder="Email" {...field} 
+                    <FormLabel>Password</FormLabel>
+                        <Input type='password' placeholder="Password" {...field} 
                          />
                       
-                    </FormControl>
-                    <FormDescription>This is your public display name.</FormDescription>
+                    <FormDescription>Enter Your Password. Don't share your password</FormDescription>
                     <FormMessage />
                     </FormItem>
                 )}
@@ -99,7 +95,7 @@ function signInform() {
                   Please wait
                 </>
               ) : (
-                'Sign Up'
+                'Sign In'
               )}
                 </Button>
                 </form>

@@ -1,5 +1,5 @@
 import { resend } from "@/lib/resend";
-import verification from "../../verificationEmail/verification";
+import Verification from "../../verificationEmail/verification";
 import { ApiResponse } from "@/types/ApiResponse";
 
 
@@ -9,7 +9,7 @@ export async function resendConfig(email:string, username:string, verifiedCode: 
             from: 'onboarding@resend.dev',
             to: email,
             subject: 'App Message Verification Code',
-            react: verification({username, otp: verifiedCode})
+            react: Verification({username, otp: verifiedCode})
           }); 
           return { success: true, message: 'Verification email sent successfully.' };
         } catch (emailError) {

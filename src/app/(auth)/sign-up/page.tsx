@@ -17,11 +17,11 @@ import { Button } from '@/components/ui/button';
 
 
 function signUp() {
-    const [username, setUsername] = useState('')
-    const [usernameMessage, setUsernameMessage] = useState('')
+    const [username, setUsername] = useState('')    //username validation check useing deouncing tech
+    const [usernameMessage, setUsernameMessage] = useState('')      //backend mesg username available or not
     const [isChecking, setIsChecking] = useState(false)
-    const [isSubmit, setIsSubmit] = useState(false)
-    const debounced  = useDebounceCallback(setUsername, 500)    // bar bar username fielder validation thik ace kina ta check kore tar thake bachar jonno use kora hoy.
+    const [isSubmit, setIsSubmit] = useState(false)     //form submit state
+    const debounced  = useDebounceCallback(setUsername, 300)    // bar bar username fielder validation thik ace kina ta check kore tar thake bachar jonno use kora hoy.
     const { toast } = useToast()
     const router = useRouter()
 
@@ -38,7 +38,7 @@ function signUp() {
         const verifyUsername = async ()=>{
             if (username) {
                 setIsChecking(true)
-                setUsernameMessage("")  //reset UserName
+                setUsernameMessage("")  //reset UserName messages
                 try {
                     const response = await axios.get<ApiResponse>(`/api/check_userName?username=${username}`)
                     console.log(response);
@@ -85,19 +85,26 @@ function signUp() {
         <div className='flex justify-center items-center min-h-screen bg-gray-300'>
             <div className='w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md'>
             <div className='text-center'>
+            <div className="text-center">
+             <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
+                 Join True Feedback Apps
+                </h1>
+                <p className="mb-4">Sign up to start your anonymous adventure</p>
+                </div>
             <Form {...register}>
+                <>
                 <form onSubmit ={register.handleSubmit(onSubmit)}>
             <FormField
                 control={register.control}
                 name="username"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                        <Input type='text' placeholder="Username" {...field} onChange={event =>{field.onChange(event); debounced(event.target.value)}} />
+                    <FormLabel className='text-lg'>Username</FormLabel>
+                    
+                        <Input type='text' placeholder="Write your Username" {...field} value={username} onChange={event =>{field.onChange(event); debounced(event.target.value)}} />
                         {isChecking && <Loader2/>}
                         {!isChecking && usernameMessage && (<p className={`text-sm ${
-                        usernameMessage === 'Username is unique'
+                        usernameMessage === 'Username available'
                           ? 'text-green-500'
                           : 'text-red-500'
                         }`}
@@ -105,8 +112,7 @@ function signUp() {
                       {usernameMessage}
 
                         </p>)}
-                    </FormControl>
-                    <FormDescription>This is your public display name.</FormDescription>
+                    
                     <FormMessage />
                     </FormItem>
                 )}
@@ -116,13 +122,12 @@ function signUp() {
                 name= "email"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                        <Input type='text' placeholder="Email" {...field} 
+                    <FormLabel  className='text-lg'>Email</FormLabel>
+                  
+                        <Input type='text' placeholder="Enter your Email" {...field} 
                          />
                       
-                    </FormControl>
-                    <FormDescription>This is your public display name.</FormDescription>
+                    
                     <FormMessage />
                     </FormItem>
                 )}
@@ -132,18 +137,17 @@ function signUp() {
                 name= "password"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                        <Input type='password' placeholder="Email" {...field} 
+                    <FormLabel  className='text-lg font-bold'>Password</FormLabel>
+                  
+                        <Input type='password' placeholder="Enter your Password" {...field} 
                          />
                       
-                    </FormControl>
-                    <FormDescription>This is your public display name.</FormDescription>
+               
                     <FormMessage />
                     </FormItem>
                 )}
                 />
-                <Button type='submit' disabled={isSubmit}>
+                <Button className="w-full my-4" type='submit' disabled={isSubmit}>
                 {isSubmit ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -154,6 +158,7 @@ function signUp() {
               )}
                 </Button>
                 </form>
+                </>
             </Form>
             </div>
             </div>

@@ -5,7 +5,7 @@ import React from 'react';
 import {User} from 'next-auth'
 import { Button } from "./ui/button";
 
-function navbar() {
+function Navbar() {
 
     const {data: session} = useSession()
     const user: User = session?.user 
@@ -35,4 +35,4 @@ function navbar() {
   );
 }
 
-export default navbar;  
+export default Navbar;  
