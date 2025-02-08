@@ -21,7 +21,7 @@ function Verify() {
 
     const onSubmit = async (data: z.infer<typeof verificationSchema>) =>{
         try {
-            const response = await axios.post<ApiResponse>('/api/verify',{
+            const response = await axios.post<ApiResponse>(`/api/verify`,{
                 username: params.username,
                 code: data.code
             })
@@ -57,7 +57,7 @@ function Verify() {
                     name= "code"
                     render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Username</FormLabel>
+                          <FormLabel>Verification Code</FormLabel>
                           
                             <Input placeholder="Verification code" {...field}  />
                        

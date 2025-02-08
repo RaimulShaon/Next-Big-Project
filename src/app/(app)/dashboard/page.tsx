@@ -1,6 +1,6 @@
 'use client'
 
-import { MessageCard } from "@/components/messageCard";
+import { MessageCard } from "@/components/MessageCard";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
@@ -12,7 +12,7 @@ import axios, { AxiosError } from "axios";
 import { Loader2, RefreshCcw } from "lucide-react";
 import { User } from "next-auth";
 import { useSession } from "next-auth/react";
-import { useCallback, useEffect, useState } from "react";
+import { Key, useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from 'zod'
 
@@ -31,10 +31,11 @@ function dashboard() {
     
     const acceptMessage = watch('acceptMessage')
 
+          //Accept Messages to show
     const fetchAcceptMessages = useCallback(async()=>{
         setIsSwitchLoading(true)
         try {
-            const response = await axios.get<ApiResponse>('/api/accept-messages');
+            const response = await axios.get<ApiResponse>(`/api/accept-messages`);
             const isAcceptingMessages = response.data.isacceptingMessages ?? false; // Provide a default value
         setValue("acceptMessage", isAcceptingMessages);
         } catch (error) {
@@ -49,12 +50,12 @@ function dashboard() {
             setIsSwitchLoading(false)
         }
     }, [setValue, toast])
-
+        //show msgs
     const fetchGetMessage = useCallback(async(refresh: boolean =false)=>{
         setLoading(true)
         setIsSwitchLoading(true)
         try {
-            const res = await axios.get('api/get-messages')
+            const res = await axios.get(`api/get-messages`)
             if (refresh) {
                 setMessage(res.data.message)
                 toast({
@@ -158,9 +159,9 @@ function dashboard() {
       </Button>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
         {message.length > 0 ? (
-          message.map((item, index) => (
+          message.map((item) => (
             <MessageCard
-              key={item._id}
+              key={item._id as Key}
               message={item}
               onMessageDelete={messageDelHandeler}
             />
