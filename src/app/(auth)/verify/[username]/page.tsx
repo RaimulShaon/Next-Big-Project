@@ -12,7 +12,7 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import * as z from 'zod'
 
-function verify() {
+function Verify() {
     const router = useRouter()
     const params = useParams()
     const {toast} = useToast();
@@ -65,7 +65,7 @@ function verify() {
                     </FormItem>
                     )}
                 />
-                <Button type="submit">Verify</Button>
+                <Button className="w-full my-4" type="submit">Verify</Button>
                 </form>
                 </Form>
             </div>
@@ -75,4 +75,4 @@ function verify() {
     );
 }
 
-export default verify;
+export default Verify;
